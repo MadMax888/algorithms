@@ -1,10 +1,13 @@
-let numbers = [7, 16, 4, 17, 10, 9, 15, 13, 6, 12, 14, 4, 11, 18, 19, 1, 0, 5];
+"use strict";
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var numbers = [7, 16, 4, 17, 10, 9, 15, 13, 6, 12, 14, 4, 11, 18, 19, 1, 0, 5];
 
 console.log('arr -- ', numbers, numbers.length);
 
-function generateRandomArray (count) {
-  let arr = [],
+function generateRandomArray(count) {
+  var arr = [],
       i = 0;
 
   while (i < count) {
@@ -16,10 +19,10 @@ function generateRandomArray (count) {
 }
 
 function isSorted(array) {
-  let bool = null;
+  var bool = null;
 
   for (var i = 1; i < array.length; i++) {
-    if ( array[i-1] <= array[i] ) {
+    if (array[i - 1] <= array[i]) {
       bool = true;
     } else {
       bool = false;
@@ -30,34 +33,31 @@ function isSorted(array) {
   return bool;
 }
 
-function testSortAlgorythm(sortAlgorythm)  {
+function testSortAlgorythm(sortAlgorythm) {
   //  const array = generateRandomArray(100000); // returns array of 1000000 elemenets
-   const array = generateRandomArray(100000); // returns array of 1000000 elemenets
-   let startTime = new Date().getTime();
-   const sortedArray = sortAlgorythm(array);
-   let endTime = new Date().getTime();
-   if(isSorted(sortedArray)) {
+  var array = generateRandomArray(100000); // returns array of 1000000 elemenets
+  var startTime = new Date().getTime();
+  var sortedArray = sortAlgorythm(array);
+  var endTime = new Date().getTime();
+  if (isSorted(sortedArray)) {
     console.log(sortAlgorythm.name + " success; duration " + (endTime - startTime) + " ms");
-   } else {
-     console.log(sortAlgorythm.name + " error; duration " + (endTime - startTime) + " ms");
-   }
+  } else {
+    console.log(sortAlgorythm.name + " error; duration " + (endTime - startTime) + " ms");
+  }
 }
 
-
-
 function strainghtInsertion(data) {
-  let i = null,
+  var i = null,
       j = null,
       x = null,
-      arr = [...data]
-      ;
+      arr = [].concat(_toConsumableArray(data));
 
   for (i = 1; i < arr.length; i++) {
     x = arr[i];
     arr[i] = arr[0];
     j = i;
-    while (x < arr[j-1] ) {
-      arr[j] = arr[j-1];
+    while (x < arr[j - 1]) {
+      arr[j] = arr[j - 1];
       j--;
     }
     arr[j] = x;
@@ -70,17 +70,16 @@ function strainghtInsertion(data) {
 testSortAlgorythm(strainghtInsertion);
 
 function strainghtInsertionInv(data) {
-  let i = null,
+  var i = null,
       j = null,
       x = null,
-      arr = [...data]
-      ;
+      arr = [].concat(_toConsumableArray(data));
 
-  for (i = arr.length-1; i >= 0; i--) {
+  for (i = arr.length - 1; i >= 0; i--) {
     x = arr[i];
     j = i;
-    while (x > arr[j+1] ) {
-      arr[j] = arr[j+1];
+    while (x > arr[j + 1]) {
+      arr[j] = arr[j + 1];
       j++;
     }
     arr[j] = x;
@@ -93,14 +92,13 @@ function strainghtInsertionInv(data) {
 testSortAlgorythm(strainghtInsertionInv);
 
 function binaryInsertion(data) {
-  let i = null,
+  var i = null,
       j = null,
       x = null,
       l = null,
       r = null,
       m = null,
-      arr = [...data]
-      ;
+      arr = [].concat(_toConsumableArray(data));
 
   for (i = 1; i < arr.length; i++) {
     x = arr[i];
@@ -116,8 +114,8 @@ function binaryInsertion(data) {
         r = m;
       }
     }
-    for (j = i; j >= r+1; j--) {
-      arr[j] = arr[j-1];
+    for (j = i; j >= r + 1; j--) {
+      arr[j] = arr[j - 1];
     };
 
     arr[r] = x;
@@ -129,17 +127,16 @@ function binaryInsertion(data) {
 // console.log("binaryInsertion(arr) -- ", binaryInsertion([8, 6, 5, 4, 2, 1])); // work incorrectly
 testSortAlgorythm(binaryInsertion);
 
-function strainghtSelection (data) {
-  let i = null,
+function strainghtSelection(data) {
+  var i = null,
       j = null,
       k = null,
       x = null,
-      arr = [...data]
-      ;
+      arr = [].concat(_toConsumableArray(data));
   for (i = 0; i < arr.length; i++) {
     k = i;
     x = arr[i];
-    for (j = i+1; j < arr.length; j++) {
+    for (j = i + 1; j < arr.length; j++) {
       if (arr[j] < x) {
         k = j;
         x = arr[k];
@@ -155,18 +152,17 @@ function strainghtSelection (data) {
 // console.log("strainghtSelection(arr) -- ", strainghtSelection(numbers));
 testSortAlgorythm(strainghtSelection);
 
-function bubbleSort (data) {
-  let i = null,
+function bubbleSort(data) {
+  var i = null,
       j = null,
       x = null,
-      arr = [...data]
-      ;
+      arr = [].concat(_toConsumableArray(data));
 
   for (i = 1; i < arr.length; i++) {
     for (j = arr.length; j >= i; j--) {
-      if (arr[j-1] > arr[j]) {
-        x = arr[j-1];
-        arr[j-1] = arr[j];
+      if (arr[j - 1] > arr[j]) {
+        x = arr[j - 1];
+        arr[j - 1] = arr[j];
         arr[j] = x;
       }
     }
@@ -178,29 +174,29 @@ function bubbleSort (data) {
 // console.log("bubbleSort(arr) -- ", bubbleSort(numbers));
 testSortAlgorythm(bubbleSort);
 
-function shakerSort (data) {
-  let j = null,
+function shakerSort(data) {
+  var j = null,
       x = null,
       l = 1,
-      arr = [...data],
+      arr = [].concat(_toConsumableArray(data)),
       r = arr.length,
       k = 1
-      // k = 0
-      ;
+  // k = 0
+  ;
   do {
-    for (j = r-1; j >= l; j--) {
-      if (arr[j-1] > arr[j]) {
-        x = arr[j-1];
-        arr[j-1] = arr[j];
+    for (j = r - 1; j >= l; j--) {
+      if (arr[j - 1] > arr[j]) {
+        x = arr[j - 1];
+        arr[j - 1] = arr[j];
         arr[j] = x;
         k = j;
       }
     }
-    l = k+1;
-    for (j = l; j <= r-1; j++) {
-      if (arr[j-1] > arr[j]) {
-        x = arr[j-1];
-        arr[j-1] = arr[j];
+    l = k + 1;
+    for (j = l; j <= r - 1; j++) {
+      if (arr[j - 1] > arr[j]) {
+        x = arr[j - 1];
+        arr[j - 1] = arr[j];
         arr[j] = x;
         k = j;
       }
@@ -214,23 +210,22 @@ function shakerSort (data) {
 // console.log("shakerSort(arr) -- ", shakerSort(numbers));
 testSortAlgorythm(shakerSort);
 
-
-function quickSort (data) {
-  let arr = [...data];
-  let count = 0;
-  let sort = function (l, r) {
-    let w = null,
+function quickSort(data) {
+  var arr = [].concat(_toConsumableArray(data));
+  var count = 0;
+  var sort = function sort(l, r) {
+    var w = null,
         x = null,
         i = l,
-        j = r
-        ;
+        j = r;
 
     x = arr[Math.floor((l + r) / 2)];
-    while (i <= j){
-      while(arr[i] < x) i += 1;
-      while(x < arr[j]) j -= 1;
-
-      if (i <= j) {
+    while (i <= j) {
+      while (arr[i] < x) {
+        i += 1;
+      }while (x < arr[j]) {
+        j -= 1;
+      }if (i <= j) {
         w = arr[i];
         arr[i] = arr[j];
         arr[j] = w;
@@ -241,10 +236,9 @@ function quickSort (data) {
 
     if (l < j) sort(l, j);
     if (i < r) sort(i, r);
-
   };
 
-  sort(0, arr.length-1);
+  sort(0, arr.length - 1);
   return arr;
 }
 

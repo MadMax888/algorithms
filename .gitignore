@@ -1,0 +1,9 @@
+/node_modules
+/bower_components
+/*.zip
+/*.ai
+/*.pdf
+/*.jpg
+/*.png
+/*.doc
+/*.docx
