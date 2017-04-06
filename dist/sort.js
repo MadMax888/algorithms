@@ -30,7 +30,7 @@ function isSorted(array) {
 }
 
 function testSortAlgorythm(sortAlgorythm) {
-  //  const array = generateRandomArray(100000); // returns array of 1000000 elemenets
+
   var array = generateRandomArray(100000); // returns array of 1000000 elemenets
   var startTime = new Date().getTime();
   var sortedArray = sortAlgorythm(array);
@@ -59,10 +59,10 @@ function strainghtInsertion(data, comparerf) {
   for (i = 1; i < arr.length; i++) {
     x = arr[i];
     arr[i] = arr[0];
+    // arr[0] = x;
     j = i;
-    while (x <= arr[j - 1]) {
-      // ?! out of range to -1
-      // while (comparerf(arr[j-1], x) == 1) {
+    // while (x < arr[j-1] && j-1 >= 0) { // ?! out of range to -1
+    while (j - 1 >= 0 && comparerf(arr[j - 1], x) == 1) {
       arr[j] = arr[j - 1];
       --j;
     }
@@ -71,20 +71,6 @@ function strainghtInsertion(data, comparerf) {
 
   return arr;
 };
-
-console.log("strainghtInsertion(arr) -- ", strainghtInsertion([33, 31, 4, 33, 0, 8, 3, 69, 113, 1]));
-// console.log(strainghtInsertion ([33, 31, 4, 33, 0, 8, 3, 69, 113, 1], function(a, b) {
-//   if (a == b) return 0;
-//   if (a > b) return 1;
-//   if (a < b) return -1;
-// }));
-// let arOb = [{tp: 33},{tp: 31},{tp: 4},{tp: 33},{tp: 0},{tp: 8},{tp: 3},{tp: 69},{tp: 113},{tp: 1}];
-// console.log(strainghtInsertion (arOb, function(a, b) {
-//   if (a.tp == b.tp) return 0;
-//   if (a.tp > b.tp) return 1;
-//   if (a.tp < b.tp) return -1;
-// }));
-// testSortAlgorythm(strainghtInsertion);
 
 function strainghtInsertionInv(data, comparerf) {
   var i = null,
@@ -99,11 +85,11 @@ function strainghtInsertionInv(data, comparerf) {
     };
   };
 
-  for (i = arr.length - 2; i > -1; i--) {
+  for (i = arr.length - 1; i >= 0; i--) {
     x = arr[i];
     j = i;
-    // while (x > arr[j+1] ) {
-    while (comparerf(x, arr[j + 1]) == 1) {
+
+    while (j < arr.length - 1 && comparerf(arr[j + 1], x) == 1) {
       arr[j] = arr[j + 1];
       ++j;
     }
@@ -112,26 +98,26 @@ function strainghtInsertionInv(data, comparerf) {
 
   return arr;
 };
-// console.log("strainghtInsertionInv (arr) -- ", strainghtInsertionInv ([5,567,4,21,0,7,8,9,9,1]));
-// console.log(strainghtInsertionInv ([5,567,4,21,2,7,8,9,9,0], function(a, b) {
-//   return a - b;
-// }));
-// console.log(strainghtInsertionInv ([5,567,4,21,2,7,8,9,9,0], function(a, b) {
-//   if (a > b) return 1;
-//   if (a < b) return -1;
-// }));
-// let arOb = [{tp: 33},{tp: 31},{tp: 4},{tp: 33},{tp: 0},{tp: 8},{tp: 3},{tp: 69},{tp: 113},{tp: 1}];
-// console.log(strainghtInsertionInv (arOb, function(a, b) {
-//   if (a.tp > b.tp) return 1;
-//   if (a.tp < b.tp) return -1;
-// }));
+console.log("strainghtInsertionInv (arr) -- ", strainghtInsertionInv([33, 31, 4, 33, 0, 8, 3, 69, 113, 1]));
+console.log(strainghtInsertionInv([33, 31, 4, 33, 0, 8, 3, 69, 113, 1], function (a, b) {
+  return a - b;
+}));
+console.log(strainghtInsertionInv([5, 567, 4, 21, 2, 7, 8, 9, 9, 0], function (a, b) {
+  if (a > b) return 1;
+  if (a < b) return -1;
+}));
+var arOb = [{ tp: 33 }, { tp: 31 }, { tp: 4 }, { tp: 33 }, { tp: 0 }, { tp: 8 }, { tp: 3 }, { tp: 69 }, { tp: 113 }, { tp: 1 }];
+console.log(strainghtInsertionInv(arOb, function (a, b) {
+  if (a.tp > b.tp) return 1;
+  if (a.tp < b.tp) return -1;
+}));
 // console.log(strainghtInsertionInv (arOb));
 //
-// let arObT = [{tp: "sd"},{tp: "azc"},{tp: "sd"},{tp: "vmk"},{tp: "srtt"},{tp: "op"},{tp: "mk"}];
-// console.log(strainghtInsertionInv (arObT, function(a, b) {
-//   if (a.tp > b.tp) return 1;
-//   if (a.tp < b.tp) return -1;
-// }));
+var arObT = [{ tp: "sd" }, { tp: "azc" }, { tp: "sd" }, { tp: "vmk" }, { tp: "srtt" }, { tp: "op" }, { tp: "mk" }];
+console.log(strainghtInsertionInv(arObT, function (a, b) {
+  if (a.tp > b.tp) return 1;
+  if (a.tp < b.tp) return -1;
+}));
 // testSortAlgorythm(strainghtInsertionInv);
 
 function binaryInsertion(data, comparerf) {
