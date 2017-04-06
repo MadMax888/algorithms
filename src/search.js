@@ -8,13 +8,8 @@ function linearSearch(arr, key) {
 	while (i < arr.length-1 && arr[i] !== key ) {
 	  i++;
 	}
-	return console.log('linearSearch index , item -- ',i, arr[i]);
+	return i;
 };
-
-linearSearch(arr, 155); // last elem
-linearSearch(arr, 12);
-linearSearch(arr, 16);
-linearSearch(arr, 19);
 
 function barrierSearch(arr, key) {
 	let i = 0;
@@ -22,14 +17,8 @@ function barrierSearch(arr, key) {
 	while (arr[i] !== key ) {
 	  i++;
 	}
-	return console.log('barrierSearch index , item -- ',i, arr[i]);
+	return i;
 };
-
-barrierSearch(arr, 155);
-barrierSearch(arr, 15);
-barrierSearch(arr, 19);
-barrierSearch(arr, 10);
-
 
 let arrSorted = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]; // for double search
 console.log('arrSorted -- ', arrSorted, arrSorted.length);
@@ -56,13 +45,9 @@ function doubleSearchOne(arr, key) {
     }
 		if ( m === r) break;
   }
-  return console.log('doubleSearchOne index , item -- ', m, arr[m]);
+  return m;
 };
 
-doubleSearchOne(arrSorted, 14);
-doubleSearchOne(arrSorted, 10);
-doubleSearchOne(arrSorted, 19);
-// doubleSearchOne(arrSorted, 192);
 
 function doubleSearchTwo(arr, key) {
   let l = 0,
@@ -76,16 +61,11 @@ function doubleSearchTwo(arr, key) {
     } else {
       r = m;
     }
-    // if ( arr[r] === key && m === r) break;
     if ( m === r) break;
   }
-  return console.log('doubleSearchTwo index , item -- ', m, arr[m]);
+  return  m;
 };
 
-doubleSearchTwo(arrSorted, 13);
-doubleSearchTwo(arrSorted, 10);
-doubleSearchTwo(arrSorted, 19);
-doubleSearchTwo(arrSorted, 122);
 
 // array.indexOf() // - linear search
 // що маємо:
