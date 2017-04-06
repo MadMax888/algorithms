@@ -1,8 +1,3 @@
-let numbers = [7, 16, 4, 17, 10, 9, 15, 13, 6, 12, 14, 4, 11, 18, 19, 1, 0, 5];
-
-
-console.log('arr -- ', numbers, numbers.length);
-
 function generateRandomArray (count) {
   let arr = [],
       i = 0;
@@ -45,20 +40,27 @@ function testSortAlgorythm(sortAlgorythm)  {
 
 
 
-function strainghtInsertion(data) {
+function strainghtInsertion(data, comparerf) {
   let i = null,
       j = null,
       x = null,
       arr = [...data]
       ;
+
+  if (!arr instanceof Array) return undefined;
+
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
 
   for (i = 1; i < arr.length; i++) {
     x = arr[i];
     arr[i] = arr[0];
     j = i;
-    while (x < arr[j-1] ) {
+    while (x <= arr[j-1] ) { // ?! out of range to -1
+    // while (comparerf(arr[j-1], x) == 1) {
       arr[j] = arr[j-1];
-      j--;
+      --j;
     }
     arr[j] = x;
   }
@@ -66,33 +68,68 @@ function strainghtInsertion(data) {
   return arr;
 };
 
-// console.log("strainghtInsertion(arr) -- ", strainghtInsertion(numbers));
-testSortAlgorythm(strainghtInsertion);
+console.log("strainghtInsertion(arr) -- ", strainghtInsertion([33, 31, 4, 33, 0, 8, 3, 69, 113, 1]));
+// console.log(strainghtInsertion ([33, 31, 4, 33, 0, 8, 3, 69, 113, 1], function(a, b) {
+//   if (a == b) return 0;
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// }));
+// let arOb = [{tp: 33},{tp: 31},{tp: 4},{tp: 33},{tp: 0},{tp: 8},{tp: 3},{tp: 69},{tp: 113},{tp: 1}];
+// console.log(strainghtInsertion (arOb, function(a, b) {
+//   if (a.tp == b.tp) return 0;
+//   if (a.tp > b.tp) return 1;
+//   if (a.tp < b.tp) return -1;
+// }));
+// testSortAlgorythm(strainghtInsertion);
 
-function strainghtInsertionInv(data) {
+function strainghtInsertionInv(data, comparerf) {
   let i = null,
       j = null,
       x = null,
       arr = [...data]
       ;
+  if (!arr instanceof Array) return undefined;
 
-  for (i = arr.length-1; i >= 0; i--) {
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
+
+  for (i = arr.length-2; i > -1; i--) {
     x = arr[i];
     j = i;
-    while (x > arr[j+1] ) {
+    // while (x > arr[j+1] ) {
+    while (comparerf(x, arr[j+1]) == 1) {
       arr[j] = arr[j+1];
-      j++;
+      ++j;
     }
     arr[j] = x;
   }
 
   return arr;
 };
+// console.log("strainghtInsertionInv (arr) -- ", strainghtInsertionInv ([5,567,4,21,0,7,8,9,9,1]));
+// console.log(strainghtInsertionInv ([5,567,4,21,2,7,8,9,9,0], function(a, b) {
+//   return a - b;
+// }));
+// console.log(strainghtInsertionInv ([5,567,4,21,2,7,8,9,9,0], function(a, b) {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// }));
+// let arOb = [{tp: 33},{tp: 31},{tp: 4},{tp: 33},{tp: 0},{tp: 8},{tp: 3},{tp: 69},{tp: 113},{tp: 1}];
+// console.log(strainghtInsertionInv (arOb, function(a, b) {
+//   if (a.tp > b.tp) return 1;
+//   if (a.tp < b.tp) return -1;
+// }));
+// console.log(strainghtInsertionInv (arOb));
+//
+// let arObT = [{tp: "sd"},{tp: "azc"},{tp: "sd"},{tp: "vmk"},{tp: "srtt"},{tp: "op"},{tp: "mk"}];
+// console.log(strainghtInsertionInv (arObT, function(a, b) {
+//   if (a.tp > b.tp) return 1;
+//   if (a.tp < b.tp) return -1;
+// }));
+// testSortAlgorythm(strainghtInsertionInv);
 
-// console.log("strainghtInsertionInv(arr) -- ", strainghtInsertionInv(numbers));
-testSortAlgorythm(strainghtInsertionInv);
-
-function binaryInsertion(data) {
+function binaryInsertion(data, comparerf) {
   let i = null,
       j = null,
       x = null,
@@ -107,9 +144,16 @@ function binaryInsertion(data) {
     l = 0;
     r = i;
 
+    if (!arr instanceof Array) return undefined;
+
+    if (comparerf == undefined) {
+        comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+    };
+
     while (l < r) {
       m = Math.floor((l + r) / 2);
-      if (arr[m] <= x) {
+      // if (arr[m] <= x) {
+      if (comparerf(arr[m], x) == -1 || comparerf(arr[m], x) == 0) {
         // l = m+1;
         l = ++m;
       } else {
@@ -127,20 +171,27 @@ function binaryInsertion(data) {
 }
 
 // console.log("binaryInsertion(arr) -- ", binaryInsertion([8, 6, 5, 4, 2, 1])); // work incorrectly
-testSortAlgorythm(binaryInsertion);
+// testSortAlgorythm(binaryInsertion);
 
-function strainghtSelection (data) {
+function strainghtSelection (data, comparerf) {
   let i = null,
       j = null,
       k = null,
       x = null,
       arr = [...data]
       ;
+
+  if (!arr instanceof Array) return undefined;
+
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
+
   for (i = 0; i < arr.length; i++) {
     k = i;
     x = arr[i];
     for (j = i+1; j < arr.length; j++) {
-      if (arr[j] < x) {
+      if (comparerf(arr[j], x) == -1) {
         k = j;
         x = arr[k];
       }
@@ -152,19 +203,22 @@ function strainghtSelection (data) {
   return arr;
 }
 
-// console.log("strainghtSelection(arr) -- ", strainghtSelection(numbers));
-testSortAlgorythm(strainghtSelection);
 
-function bubbleSort (data) {
+function bubbleSort (data, comparerf) {
   let i = null,
       j = null,
       x = null,
       arr = [...data]
       ;
+  if (!arr instanceof Array) return undefined;
+
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
 
   for (i = 1; i < arr.length; i++) {
-    for (j = arr.length; j >= i; j--) {
-      if (arr[j-1] > arr[j]) {
+    for (j = arr.length-1; j >= i; j--) {
+      if (comparerf(arr[j-1], arr[j]) == 1) {
         x = arr[j-1];
         arr[j-1] = arr[j];
         arr[j] = x;
@@ -175,21 +229,24 @@ function bubbleSort (data) {
   return arr;
 }
 
-// console.log("bubbleSort(arr) -- ", bubbleSort(numbers));
-testSortAlgorythm(bubbleSort);
+// testSortAlgorythm(bubbleSort);
 
-function shakerSort (data) {
+function shakerSort (data, comparerf) {
   let j = null,
       x = null,
       l = 1,
       arr = [...data],
       r = arr.length,
       k = 1
-      // k = 0
       ;
+  if (!arr instanceof Array) return undefined;
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
+
   do {
     for (j = r-1; j >= l; j--) {
-      if (arr[j-1] > arr[j]) {
+      if (comparerf(arr[j-1], arr[j]) == 1) {
         x = arr[j-1];
         arr[j-1] = arr[j];
         arr[j] = x;
@@ -198,7 +255,7 @@ function shakerSort (data) {
     }
     l = k+1;
     for (j = l; j <= r-1; j++) {
-      if (arr[j-1] > arr[j]) {
+      if (comparerf(arr[j-1], arr[j]) == 1) {
         x = arr[j-1];
         arr[j-1] = arr[j];
         arr[j] = x;
@@ -212,12 +269,20 @@ function shakerSort (data) {
 }
 
 // console.log("shakerSort(arr) -- ", shakerSort(numbers));
-testSortAlgorythm(shakerSort);
+
+// testSortAlgorythm(shakerSort);
 
 
-function quickSort (data) {
+function quickSort (data, comparerf) {
+
   let arr = [...data];
   let count = 0;
+
+  if (!arr instanceof Array) return undefined;
+  if (comparerf == undefined) {
+      comparerf = function(a, b) {return ((a == b) ? 0 : ((a > b) ? 1 : -1));};
+  };
+
   let sort = function (l, r) {
     let w = null,
         x = null,
@@ -227,8 +292,8 @@ function quickSort (data) {
 
     x = arr[Math.floor((l + r) / 2)];
     while (i <= j){
-      while(arr[i] < x) i += 1;
-      while(x < arr[j]) j -= 1;
+      while(comparerf(arr[i],x) == -1) i += 1;
+      while(comparerf(arr[j],x) == 1) j -= 1;
 
       if (i <= j) {
         w = arr[i];
@@ -248,4 +313,4 @@ function quickSort (data) {
   return arr;
 }
 
-testSortAlgorythm(quickSort);
+// testSortAlgorythm(quickSort);
