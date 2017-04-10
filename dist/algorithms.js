@@ -24,7 +24,7 @@ var Algorithms = {
 		return i;
 	},
 
-	doubleSearchOne: function doubleSearchOne(arr, key) {
+	binarySearchOne: function binarySearchOne(arr, key) {
 		var l = 0,
 		    r = arr.length - 1,
 		    found = false,
@@ -47,7 +47,7 @@ var Algorithms = {
 		return m;
 	},
 
-	doubleSearchTwo: function doubleSearchTwo(arr, key) {
+	binarySearchTwo: function binarySearchTwo(arr, key) {
 
 		var l = 0,
 		    r = arr.length,
